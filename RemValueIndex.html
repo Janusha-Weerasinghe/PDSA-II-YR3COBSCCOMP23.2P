@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Remember the Value Index</title>
+    <link rel="stylesheet" href="RemValueIndex.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Remember the Value Index</h1>
+        <button id="startBtn" class="start-btn">Start Game</button>
+      </div>
+      <div id="game-board" class="game-board"></div>
+      <div class="numbers-display" id="numbersDisplay"></div>
+      <div id="input-section" class="input-section">
+        <p id="instruction-text"></p>
+        <div class="input-container">
+          <input type="text" id="index1-input" placeholder="Enter index 1" />
+          <input type="text" id="index2-input" placeholder="Enter index 2" />
+          <button id="submit-btn">Submit</button>
+        </div>
+        <div id="message"></div>
+      </div>
+      <button id="restart-btn" class="restart-btn">Restart Game</button>
+    </div>
+    
+
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <label for="nameInput">Enter your name:</label>
+        <input type="text" id="nameInput" />
+        <button onclick="addName()">Add Name</button>
+        <button onclick="downloadJson()">Download Name List</button>
+      </div>
+    </div>
+
+    <script src="RemValueIndex.js"></script>
+
+  </body>
+</html>
