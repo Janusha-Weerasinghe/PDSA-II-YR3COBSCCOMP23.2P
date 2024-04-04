@@ -1,0 +1,85 @@
+body {
+    
+    background-image: url('images/backgrond2chess.gif'); /* Path to your background image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+.container {
+text-align: center;
+margin-top: 50px;
+width:400px
+}
+
+h1 {
+margin-bottom: 20px;
+background-color: blueviolet;
+color: aliceblue;
+}
+
+#board {
+display: grid;
+grid-template-columns: repeat(8, 50px);
+grid-template-rows: repeat(8, 50px);
+border: 2px solid #333;
+background-color: #999;
+margin-bottom: 20px;
+}
+
+.cell {
+width: 50px;
+height: 50px;
+background-color: #999;
+border: 1px solid black;
+}
+
+.queen {
+background-color: whitesmoke;
+border-radius: 50%;
+}
+
+button {
+padding: 10px 20px;
+font-size: 18px;
+background-color:purple;
+color: white;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+button:hover {
+background-color: purple;
+}
+
+input[type="text"] {
+padding: 8px;
+margin: 10px;
+border: 1px solid #ccc;
+border-radius: 4px;
+}
+
+#scores {
+margin-top: 20px;
+text-align: center;
+}
+
+#solution {
+font-weight: bold;
+margin-bottom: 20px;
+}
+button#playButton {
+background-color: purple;
+color: white;
+margin-left: 1px; /* Adjust the margin as needed */
+}
+#solution {
+font-weight: bold;
+margin-bottom: 20px;
+color: white; /* Set the text color to white */
+font-size: 20px; /* Increase the font size */
+}
+
