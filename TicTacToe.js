@@ -1,10 +1,12 @@
 const board = document.getElementById('board');
 const message = document.getElementById('message');
 const restartBtn = document.getElementById('restartBtn');
+const playerNameInput = document.getElementById('playerName');
 const cells = document.querySelectorAll('[data-cell]');
-let currentPlayer = 'X'; // Human player
+let currentPlayer = 'X';
 let gameBoard = ['', '', '', '', '', '', '', '', ''];
 let gameEnded = false;
+let playerName = '';
 
 const winningCombinations = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -17,6 +19,7 @@ cells.forEach(cell => {
 });
 
 restartBtn.addEventListener('click', restartGame);
+playerNameInput.addEventListener('input', updatePlayerName);
 
 function handleClick(e) {
     const cell = e.target;
@@ -67,18 +70,24 @@ function endGame(draw, winner = null) {
     if (draw) {
         message.innerText = "It's a draw!";
     } else {
-        message.innerText = `${winner} wins!`;
+        message.innerText = `${winner === 'X' ? playerName : 'Computer'} wins!`;
     }
     gameEnded = true;
 }
 
 function restartGame() {
     gameBoard = ['', '', '', '', '', '', '', '', ''];
-    currentPlayer = 'X'; // Human always starts
+    currentPlayer = 'X';
     gameEnded = false;
     message.innerText = '';
     cells.forEach(cell => {
         cell.innerText = '';
         cell.classList.remove('X', 'O');
     });
+    playerNameInput.value = ''; // Clear the player's name input field
+    playerName = ''; // Reset the player's name
+}
+
+function updatePlayerName(e) {
+    playerName = e.target.value;
 }

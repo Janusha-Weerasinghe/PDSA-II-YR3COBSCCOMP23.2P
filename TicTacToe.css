@@ -20,6 +20,12 @@ h1 {
     color: #333;
 }
 
+#playerName {
+    padding: 5px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
 /* Board and cell styling */
 .board {
     display: grid;
