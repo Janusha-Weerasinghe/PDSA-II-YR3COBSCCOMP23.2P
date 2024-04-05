@@ -1,8 +1,11 @@
+/* General Styles */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f7f7f7;
+  background-color: #ffeeff; /* Light pink background */
+  background-image: url('bg4.jpg');
+  background-size: cover;
 }
 
 .container {
@@ -10,10 +13,11 @@ body {
   margin: 50px auto;
   padding: 20px;
   background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(255, 192, 203, 0.5); /* Light pink shadow */
 }
 
+/* Header Styles */
 .header {
   display: flex;
   justify-content: space-between;
@@ -22,20 +26,14 @@ body {
 }
 
 .header h1 {
-  color: #4caf50;
+  color: #ff69b4; /* Hot pink color */
+  font-family: 'Abril Fatface', cursive; /* Playful font */
   font-size: 36px;
   margin: 0;
+  text-shadow: 2px 2px 4px rgba(255, 192, 203, 0.5); /* Light pink text shadow */
 }
 
-.header input[type="text"] {
-  padding: 10px;
-  font-size: 16px;
-  border: 2px solid #4caf50;
-  border-radius: 5px;
-  width: 200px;
-  box-sizing: border-box;
-}
-
+/* Game Board Styles */
 .game-board {
   display: flex;
   flex-wrap: wrap;
@@ -47,15 +45,15 @@ body {
 .game-board div {
   width: 100px;
   height: 100px;
-  background-color: #4caf50;
+  background-color: #ff69b4; /* Hot pink background */
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 10px;
   font-size: 36px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(255, 192, 203, 0.5); /* Light pink shadow */
   transition: transform 0.3s ease;
   cursor: pointer;
 }
@@ -64,20 +62,23 @@ body {
   transform: scale(1.05);
 }
 
-.input-section {
-  margin-bottom: 20px;
-}
-
+/* Numbers Display Styles */
 .numbers-display {
   padding: 20px;
-  background-color: #4caf50;
-  border-radius: 5px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  background-color: #ffc0cb; /* Light pink background */
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(255, 192, 203, 0.5); /* Light pink shadow */
 }
 
 .numbers-display h2 {
-  color: #333;
+  color: #ff69b4; /* Hot pink color */
   margin-top: 0;
+  font-family: 'Abril Fatface', cursive; /* Playful font */
+}
+
+/* Input Section Styles */
+.input-section {
+  margin-bottom: 20px;
 }
 
 .input-container {
@@ -90,65 +91,68 @@ body {
 .input-container input[type="text"] {
   padding: 10px;
   font-size: 16px;
-  border: 2px solid #4caf50;
-  border-radius: 5px;
+  border: 2px solid #ff69b4; /* Hot pink border */
+  border-radius: 10px;
   margin: 0 10px;
   width: 150px;
   box-sizing: border-box;
 }
 
+/* Button Styles */
 button {
   padding: 10px 20px;
   font-size: 18px;
-  background-color: #4caf50;
+  background-color: #ff69b4; /* Hot pink background */
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-family: 'Abril Fatface', cursive; /* Playful font */
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #ff1493; /* Darker pink background on hover */
 }
 
 #message {
   margin-top: 20px;
   font-weight: bold;
-  color: #4caf50;
+  color: #ff69b4; /* Hot pink color */
+  font-family: 'Abril Fatface', cursive; /* Playful font */
 }
 
 .start-btn {
   padding: 10px 20px;
   font-size: 18px;
-  background-color: #2006ca;
+  background-color: #ff69b4; /* Hot pink background */
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-family: 'Abril Fatface', cursive; /* Playful font */
 }
 
 .start-btn:hover {
-  background-color: #480bf0;
+  background-color: #ff1493; /* Darker pink background on hover */
 }
 
 .restart-btn {
   padding: 10px 20px;
   font-size: 18px;
-  background-color: #f44336;
-  color: white;
+  background-color: #ffc0cb; /* Light pink background */
+  color: #ff69b4; /* Hot pink color */
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-family: 'Abril Fatface', cursive; /* Playful font */
 }
 
 .restart-btn:hover {
-  background-color: #d32f2f;
+  background-color: #ffb6c1; /* Slightly darker pink background on hover */
 }
-
-
 
 /* Overlay */
 .overlay {
@@ -159,7 +163,7 @@ button:hover {
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
-  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+  background-color: rgba(255, 192, 203, 0.5); /* Light pink background with opacity */
   overflow: auto; /* Enable scroll if needed */
 }
 
@@ -173,13 +177,13 @@ button:hover {
   transform: translate(-50%, -50%);
   background-color: #fefefe;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Box shadow */
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 192, 203, 0.5); /* Light pink shadow */
 }
 
 /* Close Button */
 .close {
-  color: #aaa;
+  color: #ff69b4; /* Hot pink color */
   float: right;
   font-size: 24px;
   font-weight: bold;
@@ -188,7 +192,6 @@ button:hover {
 
 .close:hover,
 .close:focus {
-  color: black;
+  color: #ff1493; /* Darker pink color on hover */
   text-decoration: none;
 }
-
