@@ -12,6 +12,9 @@ body {
   max-width: 800px;
   margin: 50px auto;
   padding: 20px;
+  top: 100px;
+  left: 350px;
+  position: absolute;
   background-color: #fff;
   border-radius: 20px;
   box-shadow: 0 5px 15px rgba(255, 192, 203, 0.5); /* Light pink shadow */
