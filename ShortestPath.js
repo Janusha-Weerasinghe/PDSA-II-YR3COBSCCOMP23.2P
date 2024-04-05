@@ -23,7 +23,31 @@ function createTable() {
     for (let i = 0; i < cities.length; i++) {
         tableHTML += `<tr><td>${cities[i]}</td>`;
         for (let j = 0; j < cities.length; j++) {
-            tableHTML += `<td>${graph[i][j]}</td>`;
+            if (i === j) {
+                tableHTML += `<td></td>`; // Empty cell for diagonal entries
+            } else if (i === 0) { // City A to all cities
+                tableHTML += `<td></td>`;
+            } else if (i === 1 && j >= 1) { // City B to City B and beyond
+                tableHTML += `<td></td>`;
+            } else if (i === 2 && j >= 2) { // City C to City C and beyond
+                tableHTML += `<td></td>`;
+            } else if (i === 3 && j >= 3) { // City D to City D and beyond
+                tableHTML += `<td></td>`;
+            } else if (i === 4 && j >= 4) { // City E to City E and beyond
+                tableHTML += `<td></td>`;
+            } else if (i === 5 && j >= 5) { // City F to City F and beyond
+                tableHTML += `<td></td>`;
+            } else if (i === 6 && j >= 6) { // City G to City G and beyond
+                tableHTML += `<td></td>`;
+            } else if (i === 7 && j >= 7) { // City H to City H and beyond
+                tableHTML += `<td></td>`;
+            } else if (i === 8 && j >= 8) { // City I to City I and beyond
+                tableHTML += `<td></td>`;
+            } else if (i === 9 && j === 9) { // City J to City J
+                tableHTML += `<td></td>`;
+            } else {
+                tableHTML += `<td>${graph[i][j]}</td>`;
+            }
         }
         tableHTML += "</tr>";
     }
