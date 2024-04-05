@@ -146,12 +146,15 @@ function checkDistances() {
     const resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = ''; // Clear previous results
 
+    let allCorrect = true;
+
     endCityInputs.forEach(input => {
         const endCity = input.getAttribute('data-end-city');
         const userDistance = parseInt(input.value.trim());
 
         if (isNaN(userDistance)) {
             alert(`Please enter a valid distance for ${endCity}.`);
+            allCorrect = false;
             return;
         }
 
@@ -163,8 +166,18 @@ function checkDistances() {
             resultsDiv.innerHTML += `${endCity}: Correct<br>`;
         } else {
             resultsDiv.innerHTML += `${endCity}: Wrong<br>`;
+            allCorrect = false;
         }
     });
+
+    if (allCorrect) {
+        const winnerName = prompt("Congratulations! You won! Please enter your name:");
+        if (winnerName) {
+            resultsDiv.innerHTML += `<br>Winner: ${winnerName}`;
+        } else {
+            resultsDiv.innerHTML += "<br>No name entered.";
+        }
+    }
 }
 
 // Call setupGame when the page is ready
