@@ -1,0 +1,100 @@
+body {
+    font-family: 'Merienda', cursive;
+    margin: 0;
+    padding: 0;
+    background-color: #ffe6e6;
+    background-image: url('HomeBackground.gif');
+    background-size: cover;
+    color: #663399;
+    position: relative; /* Add this line */
+  }
+  
+  header {
+    background-color: #FF69B4;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative; /* Add this line */
+  }
+  
+  h1 {
+    font-family: 'Abril Fatface', cursive;
+    font-size: 3rem;
+    margin: 0;
+    color: #fff;
+    text-shadow: 2px 2px 0 #663399;
+  }
+  
+  /* Add this CSS rule */
+  header::before {
+    content: '';
+    position: absolute;
+    top: 10%; /* Adjust this value as needed */
+    left: 10px; /* Adjust this value as needed */
+    width: 150px; /* Adjust this value based on your logo's dimensions */
+    height: 150px; /* Adjust this value based on your logo's dimensions */
+    background-image: url('Image/logo.png'); /* Replace with your logo file path */
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+  
+  .game-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .game-link {
+    text-decoration: none;
+    color: inherit;
+    margin: 20px;
+    position: relative;
+  }
+  
+  .game-card {
+    background-color: #FF69B4;
+    /*background-image: url('Image/bg3.jpg');*/
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .game-card img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .game-info {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .game-info h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  
+  .game-info p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  
+  .game-link:hover .game-card {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  @media (max-width: 768px) {
+    .game-card {
+      width: 300px;
+    }
+  }
