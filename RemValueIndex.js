@@ -28,7 +28,7 @@ const bubbleSort = (arr) => {
   const end = performance.now();
   const time = end - start;
   console.log(`Bubble Sort: ${time} ms`);
-  //console.log(arr);
+  return time;
 };
 
 // // Tim Sort (Not implemented in JavaScript directly, we can use the built-in sort)
@@ -38,7 +38,6 @@ const bubbleSort = (arr) => {
 //   const time = end - start;
 //   console.log(`Bubble Sort: ${time} ms`);
 // }
-
 
 const insertionSort = (arr) => {
   const start = performance.now();
@@ -54,6 +53,7 @@ const insertionSort = (arr) => {
   const end = performance.now();
   const time = end - start;
   console.log(`Insertion Sort: ${time} ms`);
+  return time;
 };
 
 const mergeSort = (arr) => {
@@ -76,16 +76,16 @@ const mergeSort = (arr) => {
   };
 
   const start = performance.now();
-  
+
   const sort = (arr) => {
     if (arr.length <= 1) {
       return arr;
     }
-    
+
     const middle = Math.floor(arr.length / 2);
     const left = arr.slice(0, middle);
     const right = arr.slice(middle);
-    
+
     return merge(sort(left), sort(right));
   };
 
@@ -94,6 +94,7 @@ const mergeSort = (arr) => {
   const end = performance.now();
   const time = end - start;
   console.log(`Merge Sort: ${time} ms`);
+  return time;
 };
 const shellSort = (arr) => {
   const start = performance.now();
@@ -113,6 +114,7 @@ const shellSort = (arr) => {
   const end = performance.now();
   const time = end - start;
   console.log(`Shell Sort: ${time} ms`);
+  return time;
 };
 
 const quickSort = (arr) => {
@@ -144,6 +146,7 @@ const quickSort = (arr) => {
   const end = performance.now();
   const time = end - start;
   console.log(`Quick Sort: ${time} ms`);
+  return time;
 };
 
 const radixSort = (arr) => {
@@ -190,33 +193,42 @@ const radixSort = (arr) => {
   const end = performance.now();
   const time = end - start;
   console.log(`Radix Sort: ${time} ms`);
+  return time;
 };
 
-
-let sortedNumbers;
-let targetIndices = [];
-let correctIndices = 0;
-let displayedNumbers = [];
+sortedNumbers = [];
+targetIndices = [];
+correctIndices = 0;
+displayedNumbers = [];
 let playerName = "";
 
 const startGame = () => {
+  
   generateNumbers();
   // Sort the numbers using bubble sort
   sortedNumbers = [...numbers];
-  bubbleSort(sortedNumbers);
-  insertionSort([...numbers]);
-  mergeSort([...numbers]);
-  radixSort([...numbers]);
-  shellSort([...numbers]);
-  quickSort([...numbers]);
-
-
-  
+  const bubbleTime = bubbleSort(sortedNumbers);
+  const insertionTime = insertionSort([...numbers]);
+  const mergeTime = mergeSort([...numbers]);
+  const radixTime = radixSort([...numbers]);
+  const shellTIme = shellSort([...numbers]);
+  const quickTime = quickSort([...numbers]);
+  sendTimeDataToDB(
+    bubbleTime,
+    insertionTime,
+    mergeTime,
+    radixTime,
+    shellTIme,
+    quickTime
+  );
+  console.log(
+    `Time taken for sort: ${bubbleTime},${insertionTime},${mergeTime},${radixTime},${shellTIme},${quickTime} ms`
+  );
 
   // Display the first 20 numbers one by one with a 2-second delay
   const gameBoard = document.getElementById("game-board");
   gameBoard.innerHTML = "";
-  displayedNumbers = [];
+  const displayedNumbers = [];
   for (let i = 0; i < 20; i++) {
     const value = sortedNumbers[i];
     const valueElement = document.createElement("div");
@@ -247,47 +259,72 @@ const startGame = () => {
     displayedNumbers[targetIndices[0]]
   } and ${displayedNumbers[targetIndices[1]]}`;
   correctIndices = 0;
+
+
+
 };
+
+const restartGame = () => {
+  // Clear display
+  document.getElementById("numbersDisplay").innerText = "";
+  document.getElementById("game-board").innerHTML = "";
+  
+
+  clearInterval(this.interval);
+  // Clear states and variables
+  sortedNumbers = [];
+  displayedNumbers = [];
+  targetIndices = [];
+  correctIndices = 0;
+  
+  // Call startGame function to restart
+  startGame();
+  console.log(sortedNumbers)
+};
+
 
 // Function to display the sorted numbers
 function displayNumbers(sortedNumbers) {
+  // Clear the displayedNumbers array error show old and new array same time slove below
+  clearInterval(this.interval);
   let index = 0;
   document.getElementById("numbersDisplay").innerText = "";
-  let interval = setInterval(() => {
-    if (index < 20) {
-      document.getElementById("numbersDisplay").innerText =
-        sortedNumbers[index];
-      const value = sortedNumbers[index];
-      displayedNumbers.push(value);
-      index++;
-    } else {
-      document.getElementById("numbersDisplay").innerText = "Done";
-    }
-  }, 2000);
+  this.interval = setInterval(() => {
+      if (index < 20) {
+          document.getElementById("numbersDisplay").innerText =
+              sortedNumbers[index];
+          const value = sortedNumbers[this.index];
+          displayedNumbers.push(value);
+          index++;
+      } else {
+          document.getElementById("numbersDisplay").innerText = "Done";
+      }
+  }, 2000);  
 }
 
-// Function to save player's name and result to the database
-function saveToDatabase(playerName, result) {
-  // Here you would make a request to your backend to save the player's name and result to the database
-  console.log(`Player Name: ${playerName}, Result: ${result}`);
-}
+
+
+
+let enteredIndex1;
+let enteredIndex2;
 
 const submitIndices = () => {
   const index1Input = document.getElementById("index1-input");
   const index2Input = document.getElementById("index2-input");
-  const enteredIndex1 = parseInt(index1Input.value);
-  const enteredIndex2 = parseInt(index2Input.value);
+  enteredIndex1 = parseInt(index1Input.value);
+  enteredIndex2 = parseInt(index2Input.value);
   const message = document.getElementById("message");
 
   if (
     targetIndices.includes(enteredIndex1) &&
     targetIndices.includes(enteredIndex2)
   ) {
-    message.textContent = "Congratulations! You've identified both numbers correctly.";
+    message.textContent =
+      "Congratulations! You've identified both numbers correctly.";
     nameInput.disabled = false;
     index1Input.value = "";
     index2Input.value = "";
-    openModal();   
+    openModal();
   } else if (
     targetIndices.includes(enteredIndex1) ||
     targetIndices.includes(enteredIndex2)
@@ -309,44 +346,114 @@ const submitBtn = document.getElementById("submit-btn");
 submitBtn.addEventListener("click", submitIndices);
 
 const restartBtn = document.getElementById("restart-btn");
-restartBtn.addEventListener("click", startGame);
+restartBtn.addEventListener("click", restartGame);
 
 // const playerNameInput = document.getElementById("player-name");
 // playerNameInput.addEventListener("input", () => {
 //   playerName = playerNameInput.value || "Player";
 // });
 
-
-
 function openModal() {
-  document.getElementById('myModal').style.display = 'block';
+  document.getElementById("myModal").style.display = "block";
 }
 
 function closeModal() {
-  document.getElementById('myModal').style.display = 'none';
+  document.getElementById("myModal").style.display = "none";
 }
 
 let names = [];
 function addName() {
-  const nameInput = document.getElementById('nameInput');
+  const nameInput = document.getElementById("nameInput");
   const name = nameInput.value.trim();
-  if (name !== '') {
+  if (name !== "") {
     names.push(name);
-    nameInput.value = '';
+    nameInput.value = "";
     nameInput.disabled = true;
+    console.log(`${name}`);
+    // const index1InputN = document.getElementById("index1-input");
+    // const index2InputN = document.getElementById("index2-input");
+    // sendPlayerDataToDB(name,index1InputN.value,index2InputN.value);
+    sendPlayerDataToDB(name,enteredIndex1,enteredIndex2);
   }
 }
 function downloadJson() {
   const jsonContent = JSON.stringify({ names: names }, null, 2);
-  const blob = new Blob([jsonContent], { type: 'application/json' });
+  const blob = new Blob([jsonContent], { type: "application/json" });
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
+  const a = document.createElement("a");
   a.href = url;
-  a.download = 'names.json';
+  a.download = "names.json";
   document.body.appendChild(a);
   a.click();
   setTimeout(() => {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   }, 0);
+}
+
+function sendTimeDataToDB(
+  bubble_sort,
+  insertion_sort,
+  merge_sort,
+  radix_sort,
+  shell_sort,
+  quick_sort  
+) {
+  // Prepare the data as a query string
+  var data =
+    "bubble=" +
+    bubble_sort +
+    "&insertion=" +
+    insertion_sort +
+    "&merge=" +
+    merge_sort +
+    "&radix=" +
+    radix_sort +
+    "&shell=" +
+    shell_sort +
+    "&quick=" +
+    quick_sort;
+
+  // Create a new XMLHttpRequest object
+  var xhttp = new XMLHttpRequest();
+
+  // Define the callback function to handle the response
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText); // Log the response from the server
+    }
+  };
+
+  // Open a POST request to the PHP script
+  xhttp.open("POST", "RemValueIndex.php", true);
+
+  // Set the content type header
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+  // Send the data to the PHP script
+  xhttp.send(data);
+}
+
+function sendPlayerDataToDB(playerName,firstNumber,secondNumber) {
+  // Prepare the data as a query string
+  var data = "playerName=" + playerName + "&firstnumber=" + firstNumber + "&secondnumber=" + secondNumber;
+
+  // Create a new XMLHttpRequest object
+  var xhttp = new XMLHttpRequest();
+
+  // Define the callback function to handle the response
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText); // Log the response from the server
+    }
+  };
+
+  // Open a POST request to the PHP script
+  xhttp.open("POST", "RemValueIndexWinner.php", true);
+
+  // Set the content type header
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+  // Send the data to the PHP script
+  xhttp.send(data);
 }
