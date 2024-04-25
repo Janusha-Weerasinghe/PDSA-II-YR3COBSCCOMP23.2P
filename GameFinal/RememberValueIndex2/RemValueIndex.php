@@ -1,79 +1,42 @@
 <?php
-// Check if form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Include database connection code
-    $servername = 'localhost';
-    $username = 'root';
-    $password = '';
-    $dbname = 'game_database';
+include('../MySqlDataBaseConnection.php');
 
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
+try{
+// Check if playerName is set in the $_POST array
+if (isset($_POST['bubble']) && isset($_POST['insertion']) && isset($_POST['merge'])&& isset($_POST['radix'])&& isset($_POST['shell'])&& isset($_POST['quick'])) {
+    $bubble_sort = $_POST['bubble'];
+    $insertion_sort = $_POST['insertion'];
+    $merge_sort = $_POST['merge'];
+    $radix_sort = $_POST['radix'];
+    $shell_sort = $_POST['shell'];
+    $quick_sort = $_POST['quick'];
 
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    // Prepare and bind the SQL statement
+    $stmt = $conn->prepare("INSERT INTO remember_values_sort_time (bubble_sort,insertion_sort,merge_sort,radix_sort,shell_sort,quick_sort) VALUES (?,?,?,?,?,?)");
+    $stmt->bind_param("ssssss", $bubble_sort,$insertion_sort,$merge_sort,$radix_sort,$shell_sort,$quick_sort);
 
-    // Escape user inputs to prevent SQL injection
-    $player_name = $conn->real_escape_string($_POST['player_name']);
-    $answer1 = $conn->real_escape_string($_POST['index1']);
-    $answer2 = $conn->real_escape_string($_POST['index2']);
+    // Execute the prepared statement
+    if ($stmt->execute()) {
+        echo "Sorting Times inserted successfully into the sort data to the table.";
+        $lastInsertedId = $conn->insert_id;
+        echo "Last inserted ID: $lastInsertedId";
 
-    // Insert data into database
-    $sql = "INSERT INTO game_results (player_name, answer1, answer2) VALUES ('$player_name', '$answer1', '$answer2')";
-    if ($conn->query($sql) === TRUE) {
-        echo "Records added successfully.";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $stmt->error;
     }
 
-    // Close connection
-    $conn->close();
+    // Close the prepared statement
+    $stmt->close();
+} else {
+    echo "Time not provided!";
 }
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+}
+
+
+
 ?>
 
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Remember the Value Index</title>
-    <link rel="stylesheet" href="RemValueIndex.css" />
-  </head>
-  <body>
-    <div class="container">
-      <div class="header">
-        <h1>Remember the Value Index</h1>
-        <button id="startBtn" class="start-btn">Start Game</button>
-      </div>
-      <div id="game-board" class="game-board"></div>
-      <div class="numbers-display" id="numbersDisplay"></div>
-      <div id="input-section" class="input-section">
-        <p id="instruction-text"></p>
-        <div class="input-container">
-          <input type="text" id="index1-input" placeholder="Enter index 1" />
-          <input type="text" id="index2-input" placeholder="Enter index 2" />
-          <button id="submit-btn">Submit</button>
-        </div>
-        <div id="message"></div>
-      </div>
-      <button id="restart-btn" class="restart-btn">Restart Game</button>
-    </div>
-    
 
-    <div id="myModal" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <label for="nameInput">Enter your name:</label>
-        <input type="text" id="nameInput" />
-        <button onclick="addName()">Add Name</button>
-        <button onclick="downloadJson()">Download Name List</button>
-      </div>
-    </div>
-
-    <script src="RemValueIndex.js"></script>
-
-  </body>
-</html>

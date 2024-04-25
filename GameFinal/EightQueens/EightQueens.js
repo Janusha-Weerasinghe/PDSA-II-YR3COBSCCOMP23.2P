@@ -1,3 +1,4 @@
+let playerScores = {}; // Object to store player scores
 let queens = []; // Array to store the positions of queens
 
 // Function to move a queen
@@ -13,6 +14,7 @@ function moveQueen(cell, row, col) {
             queens.push([row, col]); // Add queen to new position
             cell.classList.add('queen');
         }
+        checkPuzzleSolved(); // Check if the puzzle is solved after moving a queen
     } catch (error) {
         console.error(error.message);
     }
@@ -129,18 +131,10 @@ function solvePuzzle() {
     }
 }
 
-// Flag to indicate whether the game is in play mode
-let playMode = false;
-
-// Flag to indicate whether the puzzle is solved within the time limit
-let puzzleSolved = false;
-
 // Function to activate play mode
 function activatePlayMode() {
     try {
         playMode = true;
-        puzzleSolved = false; // Reset the flag
-
         // Display a message to indicate play mode is activated
         const solutionDiv = document.getElementById('solution');
         solutionDiv.textContent = 'Play Mode Activated: Click on any cell to move a queen.';
@@ -163,17 +157,24 @@ function handleCellClick(row, col) {
         if (playMode) {
             const cell = document.getElementById(`cell-${row}-${col}`);
             moveQueen(cell, row, col);
-
-            // Check if the puzzle is solved
-            const solution = solve();
-            if (solution.length === 8) {
-                puzzleSolved = true;
-                const solutionDiv = document.getElementById('solution');
-                solutionDiv.textContent = 'Congratulations! You solved the puzzle!';
-            }
         }
     } catch (error) {
         console.error('Error handling cell click:', error);
+    }
+}
+
+// Function to check if the puzzle is solved
+function checkPuzzleSolved() {
+    try {
+        const solution = solve();
+        if (queens.length === 8 && queens.every(([row, col]) => solution.some(([r, c]) => r === row && c === col))) {
+            const solutionDiv = document.getElementById('solution');
+            solutionDiv.textContent = 'Congratulations! You win!';
+            playMode = false; // Disable play mode after solving the puzzle
+            showRegistrationForm(); // Show the registration form
+        }
+    } catch (error) {
+        console.error('Error checking puzzle solved:', error);
     }
 }
 
@@ -208,9 +209,21 @@ function initializeChessboard() {
 const playButton = document.getElementById('playButton');
 playButton.addEventListener('click', activatePlayMode);
 
+// Flag to indicate whether the game is in play mode
+let playMode = false;
+
+// Flag to indicate whether the puzzle is solved within the time limit
+let puzzleSolved = false;
+
 // Add an event listener to the solve button
 const solveButton = document.getElementById('solveButton');
 solveButton.addEventListener('click', solvePuzzle);
 
 // Initialize the chessboard with queens placed at start
 initializeChessboard();
+
+// Function to show the registration form
+function showRegistrationForm() {
+    const registrationContainer = document.getElementById('registration-container');
+    registrationContainer.style.display = 'block';
+}

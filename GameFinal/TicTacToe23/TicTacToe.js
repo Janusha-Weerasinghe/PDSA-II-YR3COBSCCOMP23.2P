@@ -75,7 +75,6 @@ function endGame(draw, winner = null) {
         message.innerText = 'Computer wins!';
     }
     gameEnded = true;
-    
 }
 
 function restartGame() {
@@ -116,32 +115,9 @@ closeBtn.onclick = closeNameModal;
 confirmBtn.onclick = function() {
     const playerName = nameInput.value.trim();
     if (playerName) {
-        message.innerText = `${playerName} wins!`;        
+        message.innerText = `${playerName} wins!`;
     } else {
         message.innerText = 'Player wins!';
     }
-    
-    // Create a new XMLHttpRequest object
-    var xhttp = new XMLHttpRequest();
-
-    // Define the callback function to handle the response
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText); // Log the response from the server
-        }
-    };
-
-    // Open a POST request to the PHP script
-    xhttp.open("POST", "TicTacToe.php", true);
-
-    // Set the content type header
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-    // Send the playerName data to the PHP script
-    xhttp.send("playerName=" + playerName);
-
-    // Close modal
     closeNameModal();
 }
-
-

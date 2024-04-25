@@ -1,16 +1,22 @@
+@font-face{
+  font-family: 'Knight';
+  src:url('knight-warrior-font/');
+  }
+
 body {
     font-family: 'Merienda', cursive;
     margin: 0;
     padding: 0;
     background-color: #ffe6e6;
-    background-image: url('HomeBackground.gif');
+    background-image: url('Home.jpg');
     background-size: cover;
     color: #663399;
     position: relative; /* Add this line */
   }
   
   header {
-    background-color: #FF69B4;
+    background-color: #ffffff86;
+    /*background: linear-gradient(to right,#B60F46,#D592FF);*/
     padding: 20px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -18,11 +24,13 @@ body {
   }
   
   h1 {
-    font-family: 'Abril Fatface', cursive;
+    
+    font-family:'Merienda', cursive;
     font-size: 3rem;
     margin: 0;
-    color: #fff;
-    text-shadow: 2px 2px 0 #663399;
+    
+    color: #e04377;
+    
   }
   
   /* Add this CSS rule */
@@ -58,18 +66,25 @@ body {
   }
   
   .game-card {
-    background-color: #FF69B4;
+    background: linear-gradient(to right,#B60F46,#D592FF);
     /*background-image: url('Image/bg3.jpg');*/
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    border-radius: 30px;
+    border-color: #000000;
+    border-style: solid;
     overflow: hidden;
     transition: transform 0.3s ease;
+    height: 200px;
+    width: 350px;
+    margin-top: -20px;
   }
   
   .game-card img {
-    max-width: 100%;
-    height: auto;
+    
     display: block;
+   
+    margin-top: 10px;
+    margin-left: 150px;
   }
   
   .game-info {
@@ -80,12 +95,14 @@ body {
   .game-info h2 {
     margin-top: 0;
     font-size: 1.5rem;
+    color: #fff;
     font-weight: 700;
   }
   
   .game-info p {
     font-size: 0.9rem;
     line-height: 1.4;
+    color: #fff;
   }
   
   .game-link:hover .game-card {
