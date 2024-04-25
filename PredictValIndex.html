@@ -20,6 +20,16 @@
         <p id="result"></p>
         <button id="playAgainBtn">Play Again</button>
     </div>
+
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <label for="nameInput">Enter your name:</label>
+        <input type="text" id="nameInput" />
+        <button onclick="addName()">Add Name</button>
+        <button onclick="downloadJson()">Download Name List</button>
+      </div>
+    </div>
     <script src="PredictValIndex.js"></script>
 </body>
 </html>
