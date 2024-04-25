@@ -1,6 +1,7 @@
 <?php
 include('../MySqlDataBaseConnection.php');
 
+try{
 // Check if playerName is set in the $_POST array
 if (isset($_POST['bubble']) && isset($_POST['insertion']) && isset($_POST['merge'])&& isset($_POST['radix'])&& isset($_POST['shell'])&& isset($_POST['quick'])) {
     $bubble_sort = $_POST['bubble'];
@@ -28,6 +29,9 @@ if (isset($_POST['bubble']) && isset($_POST['insertion']) && isset($_POST['merge
     $stmt->close();
 } else {
     echo "Time not provided!";
+}
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
 }
 
 
